@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import { useInterval } from "./useInterval";
+import React, { useState, useRef, useEffect } from "react"
+import styled from "styled-components"
+import { useInterval } from "./useInterval"
+import getDocument from "get-document"
 import {
   CANVAS_SIZE,
   SNAKE_START,
@@ -8,54 +9,54 @@ import {
   SCALE,
   SPEED,
   DIRECTIONS,
-} from "./constants";
+} from "./constants"
 
-const SnakeGame = (props) => {
-  const canvasRef = useRef();
-  const [snake, setSnake] = useState(SNAKE_START);
-  const [food, setFood] = useState(FOOD_START);
-  const [dir, setDir] = useState([0, -1]);
-  const [speed, setSpeed] = useState(null);
-  const [gameOver, setGameOver] = useState(true);
-  const [score, setScore] = useState(0);
-  const [foodColor, setFoodColor] = useState("#E07A5F");
+const SnakeGame = props => {
+  const canvasRef = useRef()
+  const [snake, setSnake] = useState(SNAKE_START)
+  const [food, setFood] = useState(FOOD_START)
+  const [dir, setDir] = useState([0, -1])
+  const [speed, setSpeed] = useState(null)
+  const [gameOver, setGameOver] = useState(true)
+  const [score, setScore] = useState(0)
+  const [foodColor, setFoodColor] = useState("#E07A5F")
 
-  useInterval(() => gameLoop(), speed);
+  useInterval(() => gameLoop(), speed)
 
   const endGame = () => {
-    setSpeed(null);
-    setGameOver(true);
-    clearScore();
-    props.stateSetter({ description: "Game Over" });
-  };
+    setSpeed(null)
+    setGameOver(true)
+    clearScore()
+    props.stateSetter({ description: "Game Over" })
+  }
 
   const moveSnake = ({ keyCode }) => {
     if (
       gameOver === true &&
       (keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40)
     ) {
-      startGame();
+      startGame()
     } else {
-      keyCode >= 37 && keyCode <= 40 && setDir(DIRECTIONS[keyCode]);
+      keyCode >= 37 && keyCode <= 40 && setDir(DIRECTIONS[keyCode])
     }
-  };
+  }
 
-  document.body.onkeyup = function (e) {
-    moveSnake(e);
-  };
+  getDocument(window).body.onkeyup = function (e) {
+    moveSnake(e)
+  }
 
   const createFood = () =>
-    food.map((_a, i) => Math.floor(Math.random() * (CANVAS_SIZE[i] / SCALE)));
+    food.map((_a, i) => Math.floor(Math.random() * (CANVAS_SIZE[i] / SCALE)))
 
   const incrementScore = () => {
-    setScore((score) => score + 1);
-    props.stateSetter({ description: "score: " + score.toString() });
-    setSpeed((speed) => speed - 10);
-  };
+    setScore(score => score + 1)
+    props.stateSetter({ description: "score: " + score.toString() })
+    setSpeed(speed => speed - 10)
+  }
 
   const clearScore = () => {
-    setScore(0);
-  };
+    setScore(0)
+  }
 
   const checkCollision = (piece, snk = snake) => {
     if (
@@ -64,79 +65,79 @@ const SnakeGame = (props) => {
       piece[1] * SCALE >= CANVAS_SIZE[1] ||
       piece[1] < 0
     )
-      return true;
+      return true
 
     for (const segment of snk) {
-      if (piece[0] === segment[0] && piece[1] === segment[1]) return true;
+      if (piece[0] === segment[0] && piece[1] === segment[1]) return true
     }
-    return false;
-  };
+    return false
+  }
 
-  const checkFoodCollision = (newSnake) => {
+  const checkFoodCollision = newSnake => {
     if (newSnake[0][0] === food[0] && newSnake[0][1] === food[1]) {
-      let newFood = createFood();
-      incrementScore();
-      setFoodColor(randomFoodColor());
+      let newFood = createFood()
+      incrementScore()
+      setFoodColor(randomFoodColor())
       while (checkCollision(newFood, newSnake)) {
-        newFood = createFood();
+        newFood = createFood()
       }
-      setFood(newFood);
-      return true;
+      setFood(newFood)
+      return true
     }
-    return false;
-  };
+    return false
+  }
 
   const randomFoodColor = () => {
-    const random = Math.floor(Math.random() * Math.floor(4));
+    const random = Math.floor(Math.random() * Math.floor(4))
     if (random === 0) {
-      return "#E07A5F";
+      return "#E07A5F"
     } else if (random === 1) {
-      return "#F39237";
+      return "#F39237"
     } else if (random === 2) {
-      return "#EF8275";
+      return "#EF8275"
     } else if (random === 3) {
-      return "#C1666B";
+      return "#C1666B"
     } else if (random === 4) {
-      return "#D5896F";
+      return "#D5896F"
     } else {
-      return "345666";
+      return "345666"
     }
-  };
+  }
 
   const gameLoop = () => {
-    const snakeCopy = JSON.parse(JSON.stringify(snake));
-    const newSnakeHead = [snakeCopy[0][0] + dir[0], snakeCopy[0][1] + dir[1]];
-    snakeCopy.unshift(newSnakeHead);
-    if (checkCollision(newSnakeHead)) endGame();
-    if (!checkFoodCollision(snakeCopy)) snakeCopy.pop();
-    setSnake(snakeCopy);
-  };
+    const snakeCopy = JSON.parse(JSON.stringify(snake))
+    const newSnakeHead = [snakeCopy[0][0] + dir[0], snakeCopy[0][1] + dir[1]]
+    snakeCopy.unshift(newSnakeHead)
+    if (checkCollision(newSnakeHead)) endGame()
+    if (!checkFoodCollision(snakeCopy)) snakeCopy.pop()
+    setSnake(snakeCopy)
+  }
 
   const startGame = () => {
-    setSnake(SNAKE_START);
-    setFood(FOOD_START);
-    setDir([0, -1]);
-    setSpeed(SPEED);
-    setGameOver(false);
-    incrementScore();
-  };
+    setSnake(SNAKE_START)
+    setFood(FOOD_START)
+    setDir([0, -1])
+    setSpeed(SPEED)
+    setGameOver(false)
+    incrementScore()
+  }
 
   useEffect(() => {
-    const context = canvasRef.current.getContext("2d");
-    context.setTransform(SCALE, 0, 0, SCALE, 0, 0);
-    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    context.fillStyle = "#4A5759";
-    snake.forEach(([x, y]) => context.fillRect(x, y, 1, 1));
-    context.fillStyle = foodColor;
-    context.fillRect(food[0], food[1], 1, 1);
-  }, [snake, food, gameOver]);
+    const context = canvasRef.current.getContext("2d")
+    context.setTransform(SCALE, 0, 0, SCALE, 0, 0)
+    context.clearRect(0, 0, window.innerWidth, window.innerHeight)
+    context.fillStyle = "#4A5759"
+    snake.forEach(([x, y]) => context.fillRect(x, y, 1, 1))
+    context.fillStyle = foodColor
+    context.fillRect(food[0], food[1], 1, 1)
+  }, [snake, food, gameOver])
 
   return (
     <Container
       isGameOver={gameOver}
       role="button"
       tabIndex="0"
-      onKeyDown={(e) => moveSnake(e)}
+      onKeyDown={e => moveSnake(e)}
     >
       <Canvas
         style={{ border: "1px solid gray" }}
@@ -145,8 +146,8 @@ const SnakeGame = (props) => {
         height={`${CANVAS_SIZE[1]}px`}
       />
     </Container>
-  );
-};
+  )
+}
 
 const Container = styled.div`
   background-color: transparent;
@@ -160,10 +161,10 @@ const Container = styled.div`
   overflow: hidden;
   text-align: center;
   outline: none;
-  opacity: ${(props) => (props.isGameOver ? "0" : "1")};
+  opacity: ${props => (props.isGameOver ? "0" : "1")};
   transition: visibility 0s linear 0s, opacity 700ms;
   pointer-events: none;
-`;
+`
 
 const Canvas = styled.canvas`
   background-color: transparent;
@@ -174,6 +175,6 @@ const Canvas = styled.canvas`
   display: inline-block;
   outline: none;
   margin-top: 5%;
-`;
+`
 
-export default SnakeGame;
+export default SnakeGame
