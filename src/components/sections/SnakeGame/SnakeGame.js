@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 import { useInterval } from "./useInterval"
 import getDocument from "get-document"
+import useKeypress from "react-use-keypress"
 import {
   CANVAS_SIZE,
   SNAKE_START,
@@ -30,20 +31,19 @@ const SnakeGame = props => {
     props.stateSetter({ description: "Game Over" })
   }
 
-  const moveSnake = ({ keyCode }) => {
+  useKeypress(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"], event => {
     if (
       gameOver === true &&
-      (keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40)
+      (event.key === "ArrowUp" ||
+        event.key === "ArrowDown" ||
+        event.key === "ArrowLeft" ||
+        event.key === "ArrowRight")
     ) {
       startGame()
     } else {
-      keyCode >= 37 && keyCode <= 40 && setDir(DIRECTIONS[keyCode])
+      setDir(DIRECTIONS[event.key])
     }
-  }
-
-  getDocument(window).body.onkeyup = function (e) {
-    moveSnake(e)
-  }
+  })
 
   const createFood = () =>
     food.map((_a, i) => Math.floor(Math.random() * (CANVAS_SIZE[i] / SCALE)))
@@ -133,12 +133,7 @@ const SnakeGame = props => {
   }, [snake, food, gameOver])
 
   return (
-    <Container
-      isGameOver={gameOver}
-      role="button"
-      tabIndex="0"
-      onKeyDown={e => moveSnake(e)}
-    >
+    <Container isGameOver={gameOver} role="button" tabIndex="0">
       <Canvas
         style={{ border: "1px solid gray" }}
         ref={canvasRef}
