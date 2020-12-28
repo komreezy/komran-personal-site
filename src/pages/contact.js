@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "gatsby";
-import { H1, MediumText } from "../components/styles/TextStyles";
-import NavigationButton from "../components/sections/NavigationButton";
-import Layout from "../components/layout/layout";
-import SEO from "../components/layout/seo";
+import React from "react"
+import styled from "styled-components"
+import { Link } from "gatsby"
+import { H1, MediumText } from "../components/styles/TextStyles"
+import NavigationButton from "../components/sections/NavigationButton"
+import Layout from "../components/layout/layout"
+import SEO from "../components/layout/seo"
 
 function Contact() {
   function sendEmail() {
@@ -28,22 +28,22 @@ function Contact() {
           value: "and easy to do anywhere, even with cURL",
         },
       ],
-    };
+    }
 
     if (typeof XMLHttpRequest !== "undefined") {
-      const Http = new XMLHttpRequest();
-      const url = "https://api.sendgrid.com/v3/mail/send";
+      const Http = new XMLHttpRequest()
+      const url = "https://api.sendgrid.com/v3/mail/send"
       const clientSecret =
-        "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";
-      const authorizationHeaderString = "Bearer " + clientSecret;
+        "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"
+      const authorizationHeaderString = "Bearer " + clientSecret
       Http.onreadystatechange = () => {
-        console.log(Http.responseText);
-      };
-      Http.open("POST", url, true);
-      Http.setRequestHeader("Access-Control-Allow-Origin", null);
-      Http.setRequestHeader("Content-Type", "application/json");
-      Http.setRequestHeader("Authorization", authorizationHeaderString);
-      Http.send(JSON.stringify(params));
+        console.log(Http.responseText)
+      }
+      Http.open("POST", url, true)
+      Http.setRequestHeader("Access-Control-Allow-Origin", null)
+      Http.setRequestHeader("Content-Type", "application/json")
+      Http.setRequestHeader("Authorization", authorizationHeaderString)
+      Http.send(JSON.stringify(params))
     }
   }
 
@@ -58,9 +58,9 @@ function Contact() {
           <Link to="/about/">
             <NavigationButton title="About"></NavigationButton>
           </Link>
-          <Link to="/page-2/">
+          <a href="https://medium.com/@komreezy_" target="_blank">
             <NavigationButton title="Blog"></NavigationButton>
-          </Link>
+          </a>
           <Link to="/contact/">
             <NavigationButton title="Contact"></NavigationButton>
           </Link>
@@ -115,10 +115,10 @@ function Contact() {
         </ContentWrapper>
       </Wrapper>
     </Layout>
-  );
+  )
 }
 
-export default Contact;
+export default Contact
 
 const Wrapper = styled.div`
   display: grid;
@@ -132,7 +132,7 @@ const Wrapper = styled.div`
   background: #f1f2eb;
   padding-top: 12px;
   padding-right: 12px;
-`;
+`
 
 const ContentWrapper = styled.div`
   grid-area: "content";
@@ -141,24 +141,24 @@ const ContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 300px;
-`;
+`
 
 const LeftBlock = styled.div`
   float: left;
   width: 218pt;
   margin-right: 24pt;
-`;
+`
 
 const RightBlock = styled.div`
   float: right;
   width: 218pt;
   margin-left: 24pt;
-`;
+`
 
 const TitleWrapper = styled.div`
   padding-right: 12px;
   grid-area: "title";
-`;
+`
 
 const Title = styled(H1)`
   font-family: "Lalezar", cursive;
@@ -166,21 +166,21 @@ const Title = styled(H1)`
   text-align: left;
   width: 218pt;
   padding-bottom: 4px;
-`;
+`
 
 const Description = styled(MediumText)`
   font-family: "Jura", sans-serif;
   color: #151515;
   max-width: 218pt;
   text-align: left;
-`;
+`
 
 const Logo = styled.img`
   width: 3%;
   height: auto;
   padding-top: 8px;
   padding-left: 24px;
-`;
+`
 
 const Social = styled.div`
   display: flex;
@@ -188,13 +188,13 @@ const Social = styled.div`
   justify-content: left;
   width: 218pt;
   margin-top: 48px;
-`;
+`
 
 const SocialIcon = styled.img`
   width: 20px;
   height: 20px;
   padding-right: 32px;
-`;
+`
 
 const InputTitle = styled(MediumText)`
   font-family: "Jura", sans-serif;
@@ -205,11 +205,11 @@ const InputTitle = styled(MediumText)`
   color: #151515;
   max-width: 218pt;
   text-align: left;
-`;
+`
 
 const EmailInputTitle = styled(InputTitle)`
   margin-top: 38pt;
-`;
+`
 
 const EmailInput = styled.input`
   background-color: #f9f9f5;
@@ -222,7 +222,7 @@ const EmailInput = styled.input`
   border: none;
   margin-bottom: 12pt;
   outline: none;
-`;
+`
 const MessageInput = styled.textarea`
   background-color: #f9f9f5;
   width: 212pt;
@@ -234,7 +234,7 @@ const MessageInput = styled.textarea`
   border: none;
   outline: none;
   resize: none;
-`;
+`
 
 const SubmitButton = styled.button`
   color: white;
@@ -250,4 +250,4 @@ const SubmitButton = styled.button`
   margin-top: 12pt;
   margin-right: -2pt;
   cursor: pointer;
-`;
+`

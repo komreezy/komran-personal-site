@@ -1,44 +1,44 @@
-import React, { useEffect, useState } from "react";
-import firebase from "gatsby-plugin-firebase";
-import { Link } from "gatsby";
-import Layout from "../components/layout/layout";
-import SEO from "../components/layout/seo";
-import styled from "styled-components";
-import { SmallText } from "../components/styles/TextStyles";
-import NavigationButton from "../components/sections/NavigationButton";
-import ListCell from "../components/sections/ListCell";
-import MusicCell from "../components/sections/MusicCell";
-import MenuButton from "../components/sections/MenuButton";
+import React, { useEffect, useState } from "react"
+import firebase from "gatsby-plugin-firebase"
+import { Link } from "gatsby"
+import Layout from "../components/layout/layout"
+import SEO from "../components/layout/seo"
+import styled from "styled-components"
+import { SmallText } from "../components/styles/TextStyles"
+import NavigationButton from "../components/sections/NavigationButton"
+import ListCell from "../components/sections/ListCell"
+import MusicCell from "../components/sections/MusicCell"
+import MenuButton from "../components/sections/MenuButton"
 
 function About() {
-  var newXHR = null;
+  var newXHR = null
   const [state, setState] = useState({
     tab: "Idle",
     rows: [],
     lists: [],
-  });
+  })
   useEffect(() => {
-    const onChange = (newData) => {
+    const onChange = newData => {
       setState({
         tab: state.tab,
         lists: newData.val(),
-      });
-    };
+      })
+    }
 
     // listen to /views/id and on value change execute "onChange"
-    firebase.database().ref("/data/lists").on("value", onChange);
+    firebase.database().ref("/data/lists").on("value", onChange)
 
     return () => {
       // On loading this component, id is sent to increment-views to increment the
       // value and the returned value is stored in viewCount.
       // Upon completion, if an instance of database exists, detach it using off()
       if (firebase.database()) {
-        firebase.database().ref("/data/lists").off("value", onChange);
+        firebase.database().ref("/data/lists").off("value", onChange)
       }
-    };
-  }, []);
+    }
+  }, [])
 
-  const content = (tab) => {
+  const content = tab => {
     if (tab === "Lists") {
       return (
         <ProfileDescriptionStack>
@@ -50,7 +50,7 @@ function About() {
           </Subtitle>
           <ListUL>{createListsTable()}</ListUL>
         </ProfileDescriptionStack>
-      );
+      )
     } else if (tab === "Music") {
       return (
         <ProfileDescriptionStack>
@@ -61,7 +61,7 @@ function About() {
           </Subtitle>
           <MusicUL>{createMusicTable()}</MusicUL>
         </ProfileDescriptionStack>
-      );
+      )
     } else if (tab === "Photos") {
       return (
         <ProfileDescriptionStack>
@@ -82,7 +82,7 @@ function About() {
             scrolling="no"
           ></iframe>
         </ProfileDescriptionStack>
-      );
+      )
     } else {
       return (
         <ProfileDescriptionStack>
@@ -102,21 +102,21 @@ function About() {
             that really deserves credit for raising me.
           </Description>
         </ProfileDescriptionStack>
-      );
+      )
     }
-  };
+  }
 
   const createListsTable = () => {
-    const lists = state.lists ? state.lists : [];
+    const lists = state.lists ? state.lists : []
     return lists.map((list, index) => {
-      return <ListCell key={index} list={list} />;
-    });
-  };
+      return <ListCell key={index} list={list} />
+    })
+  }
 
   const createMusicTable = () => {
-    const rows = state.rows ? state.rows : [];
+    const rows = state.rows ? state.rows : []
     return rows.map((track, index) => {
-      const { imageURL, name, artist, spotifyURL } = track;
+      const { imageURL, name, artist, spotifyURL } = track
       return (
         <MusicCell
           key={index}
@@ -125,72 +125,72 @@ function About() {
           artist={artist}
           spotifyURL={spotifyURL}
         />
-      );
-    });
-  };
+      )
+    })
+  }
 
   function fetchLists() {
     setState({
       lists: state.lists,
       rows: state.rows,
       tab: "Lists",
-    });
+    })
   }
 
   function fetchSpotifyToken() {
-    const Http = new XMLHttpRequest();
-    const url = "https://accounts.spotify.com/api/token";
-    const clientId = "640c3d0e9d1f456eb7bb2abc43a345d9";
-    const clientSecret = "4724f893e53b4e0cad88eaf89739f8eb";
+    const Http = new XMLHttpRequest()
+    const url = "https://accounts.spotify.com/api/token"
+    const clientId = "640c3d0e9d1f456eb7bb2abc43a345d9"
+    const clientSecret = "4724f893e53b4e0cad88eaf89739f8eb"
     const encodedData = Buffer.from(clientId + ":" + clientSecret).toString(
       "base64"
-    );
-    const authorizationHeaderString = "Basic " + encodedData;
+    )
+    const authorizationHeaderString = "Basic " + encodedData
     Http.onreadystatechange = () => {
-      const part1 = Http.responseText.split('","');
-      const token = part1[0].replace('{"access_token":"', "");
+      const part1 = Http.responseText.split('","')
+      const token = part1[0].replace('{"access_token":"', "")
       fetchPlaylistTracks(token, (response, responseText) => {
-        const json = JSON.parse(response);
-        createTrackItems(json.tracks.items);
-      });
-    };
-    Http.open("POST", url, true);
-    Http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    Http.setRequestHeader("Authorization", authorizationHeaderString);
-    Http.send("grant_type=client_credentials");
+        const json = JSON.parse(response)
+        createTrackItems(json.tracks.items)
+      })
+    }
+    Http.open("POST", url, true)
+    Http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    Http.setRequestHeader("Authorization", authorizationHeaderString)
+    Http.send("grant_type=client_credentials")
   }
 
   function fetchPlaylistTracks(token, callback) {
-    const url = "https://api.spotify.com/v1/playlists/337JGxGGpdnKTYYmjNnEXV";
+    const url = "https://api.spotify.com/v1/playlists/337JGxGGpdnKTYYmjNnEXV"
     newXHR =
-      new XMLHttpRequest() || new window.ActiveXObject("Microsoft.XMLHTTP");
-    newXHR.open("GET", url, true);
-    newXHR.setRequestHeader("Authorization", "Bearer " + token);
-    newXHR.send();
+      new XMLHttpRequest() || new window.ActiveXObject("Microsoft.XMLHTTP")
+    newXHR.open("GET", url, true)
+    newXHR.setRequestHeader("Authorization", "Bearer " + token)
+    newXHR.send()
     newXHR.onreadystatechange = function () {
       if (this.status === 200 && this.readyState === 4) {
-        callback(this.response, this.responseText);
+        callback(this.response, this.responseText)
       }
-    };
+    }
   }
 
   function createTrackItems(tracks) {
-    var trackObjects = [];
+    var trackObjects = []
     tracks.map((trackObject, index) => {
-      const track = trackObject.track;
+      const track = trackObject.track
       trackObjects.push({
         imageURL: track.album.images[0].url,
         name: track.name,
         artist: track.album.artists[0].name,
         spotifyURL: track.album.external_urls.spotify,
-      });
-      return null;
-    });
+      })
+      return null
+    })
     setState({
       rows: trackObjects,
       tab: "Music",
       lists: state.lists,
-    });
+    })
   }
 
   return (
@@ -203,9 +203,9 @@ function About() {
             <Link to="/about/">
               <NavigationButton title="About"></NavigationButton>
             </Link>
-            <Link to="/page-2/">
+            <a href="https://medium.com/@komreezy_" target="_blank">
               <NavigationButton title="Blog"></NavigationButton>
-            </Link>
+            </a>
             <Link to="/contact/">
               <NavigationButton title="Contact"></NavigationButton>
             </Link>
@@ -251,10 +251,10 @@ function About() {
         </ListsWrapper>
       </Wrapper>
     </Layout>
-  );
+  )
 }
 
-export default About;
+export default About
 
 const Wrapper = styled.div`
   display: grid;
@@ -262,7 +262,7 @@ const Wrapper = styled.div`
   height: 100vh;
   position: fixed;
   background-image: linear-gradient(#f1f2eb, #ffffff);
-`;
+`
 
 // Top half
 const ContentWrapper = styled.div`
@@ -280,7 +280,7 @@ const ContentWrapper = styled.div`
   padding-top: 12px;
   padding-right: 12px;
   overflow: scroll;
-`;
+`
 
 // bottom half
 const ListsWrapper = styled.div`
@@ -293,12 +293,12 @@ const ListsWrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
   grid-template-areas: "margin buttons margin";
-`;
+`
 
 /// NAVIGATION : ---------------------------------------------------------------------------------------------------------
 const TitleWrapper = styled.div`
   grid-area: "title";
-`;
+`
 
 const Logo = styled.img`
   position: fixed;
@@ -307,7 +307,7 @@ const Logo = styled.img`
   width: 3%;
   height: auto;
   z-index: 100;
-`;
+`
 
 /// PROFILE : ---------------------------------------------------------------------------------------------------------
 const ProfileWrapper = styled.div`
@@ -315,13 +315,13 @@ const ProfileWrapper = styled.div`
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas: "margin profile margin";
   margin-top: -20px;
-`;
+`
 
 const ProfileDescriptionStack = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-`;
+`
 
 const ProfileImage = styled.img`
   width: 200px;
@@ -331,7 +331,7 @@ const ProfileImage = styled.img`
   margin-left: auto;
   margin-right: auto;
   grid-area: "profile";
-`;
+`
 
 const Title = styled.h1`
   font-family: "Lalezar", cursive;
@@ -342,7 +342,7 @@ const Title = styled.h1`
   padding-right: 20%;
   padding-bottom: 12px;
   max-width: 800px;
-`;
+`
 
 const Subtitle = styled(SmallText)`
   font-family: "Jura", sans-serif;
@@ -352,13 +352,13 @@ const Subtitle = styled(SmallText)`
   padding-right: 20%;
   padding-bottom: 24px;
   max-width: 800px;
-`;
+`
 
 const Description = styled(Subtitle)`
   font-size: 12pt;
   padding-left: 10%;
   padding-right: 10%;
-`;
+`
 
 /// BUTTONS : ---------------------------------------------------------------------------------------------------------
 const ListButtonContainer = styled.div`
@@ -369,11 +369,11 @@ const ListButtonContainer = styled.div`
   flex-direction: column;
   background-color: rgba(35, 163, 132, 10%);
   height: 100vh;
-`;
+`
 
 const Margin = styled.div`
   grid-area: "margin";
-`;
+`
 
 /// LISTS : ---------------------------------------------------------------------------------------------------------
 
@@ -382,7 +382,7 @@ const ListUL = styled.ul`
   padding-left: 160px;
   padding-right: 160px;
   padding-bottom: 32px;
-`;
+`
 
 const MusicUL = styled.ul`
   text-align: center;
@@ -392,4 +392,4 @@ const MusicUL = styled.ul`
   columns: 3;
   -webkit-columns: 3;
   -moz-columns: 3;
-`;
+`

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Link } from "gatsby";
-import NavigationButton from "../components/sections/NavigationButton";
-import Layout from "../components/layout/layout";
-import SEO from "../components/layout/seo";
-import ProjectCell from "../components/sections/ProjectCell";
+import React, { useState } from "react"
+import styled from "styled-components"
+import { Link } from "gatsby"
+import NavigationButton from "../components/sections/NavigationButton"
+import Layout from "../components/layout/layout"
+import SEO from "../components/layout/seo"
+import ProjectCell from "../components/sections/ProjectCell"
 
 function Projects() {
   const [state, setState] = useState([
@@ -66,12 +66,12 @@ function Projects() {
       link:
         "https://appadvice.com/app/dreamscape-dream-journal-reader/1088519144",
     },
-  ]);
+  ])
 
   const createProjectsTable = () => {
-    const projects = state ? state : [];
+    const projects = state ? state : []
     return projects.map((project, index) => {
-      const { name, icon, description, link } = project;
+      const { name, icon, description, link } = project
       return (
         <ProjectCell
           key={index}
@@ -80,9 +80,9 @@ function Projects() {
           description={description}
           link={link}
         />
-      );
-    });
-  };
+      )
+    })
+  }
 
   return (
     <Layout>
@@ -95,9 +95,9 @@ function Projects() {
           <Link to="/about/">
             <NavigationButton title="About"></NavigationButton>
           </Link>
-          <Link to="/page-2/">
+          <a href="https://medium.com/@komreezy_" target="_blank">
             <NavigationButton title="Blog"></NavigationButton>
-          </Link>
+          </a>
           <Link to="/contact/">
             <NavigationButton title="Contact"></NavigationButton>
           </Link>
@@ -111,10 +111,10 @@ function Projects() {
         </ContentWrapper>
       </Wrapper>
     </Layout>
-  );
+  )
 }
 
-export default Projects;
+export default Projects
 
 const Wrapper = styled.div`
   display: grid;
@@ -128,7 +128,7 @@ const Wrapper = styled.div`
   background: #f1f2eb;
   padding-top: 12px;
   padding-right: 12px;
-`;
+`
 
 const ContentWrapper = styled.div`
   grid-area: "content";
@@ -138,7 +138,7 @@ const ContentWrapper = styled.div`
   align-items: center;
   margin-bottom: 5%;
   margin-top: -5%;
-`;
+`
 
 const Title = styled.h1`
   font-family: "Lalezar", cursive;
@@ -147,23 +147,23 @@ const Title = styled.h1`
   text-align: center;
   padding-bottom: 24px;
   margin-top: -5%;
-`;
+`
 
 const TitleWrapper = styled.div`
   padding-right: 12px;
   grid-area: "title";
-`;
+`
 
 const Logo = styled.img`
   width: 3%;
   height: auto;
   padding-top: 8px;
   padding-left: 24px;
-`;
+`
 
 const ProjectUL = styled.ul`
   text-align: center;
   padding-bottom: 32px;
   margin-left: 20%;
   margin-right: 20%;
-`;
+`
