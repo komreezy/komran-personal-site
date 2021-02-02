@@ -207,7 +207,11 @@ function About() {
             <Link to="/about/">
               <NavigationButton title="About"></NavigationButton>
             </Link>
-            <a href="https://medium.com/@komreezy_" target="_blank">
+            <a
+              href="https://medium.com/@komreezy_"
+              target="_blank"
+              rel="noreferrer"
+            >
               <NavigationButton title="Blog"></NavigationButton>
             </a>
             <Link to="/contact/">
@@ -249,7 +253,11 @@ function About() {
               <Link to="/about/">
                 <NavigationButton title="About"></NavigationButton>
               </Link>
-              <a href="https://medium.com/@komreezy_" target="_blank">
+              <a
+                href="https://medium.com/@komreezy_"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <NavigationButton title="Blog"></NavigationButton>
               </a>
               <Link to="/contact/">
@@ -450,6 +458,12 @@ const MusicUL = styled.ul`
 /// MOBILE : ---------------------------------------------------------------------------------------------------------
 const MobileContainer = styled.div`
   margin: auto;
+  position: fixed;
+  background: #f1f2eb;
+  padding-top: 12px;
+  padding-right: 12px;
+  width: 100vw;
+  height: 100vh;
 `
 
 const MobileDescription = styled.p`
@@ -494,10 +508,4 @@ const MobileLogo = styled.img`
   margin-right: auto;
   width: 10%;
   height: auto;
-`
-
-const MobileSpacer = styled.br`
-  display: block;
-  width: 100%;
-  height: 2%;
 `

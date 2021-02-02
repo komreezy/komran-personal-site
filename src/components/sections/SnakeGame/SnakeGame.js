@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 import { useInterval } from "./useInterval"
-import getDocument from "get-document"
 import useKeypress from "react-use-keypress"
 import {
   CANVAS_SIZE,

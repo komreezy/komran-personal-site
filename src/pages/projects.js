@@ -97,7 +97,11 @@ function Projects() {
             <Link to="/about/">
               <NavigationButton title="About"></NavigationButton>
             </Link>
-            <a href="https://medium.com/@komreezy_" target="_blank">
+            <a
+              href="https://medium.com/@komreezy_"
+              target="_blank"
+              rel="noreferrer"
+            >
               <NavigationButton title="Blog"></NavigationButton>
             </a>
             <Link to="/contact/">
@@ -226,8 +230,13 @@ const MobileLogo = styled.img`
 
 const MobileContainer = styled.div`
   margin: auto;
+  position: relative;
+  background: #f1f2eb;
+  padding-top: 12px;
+  padding-right: 12px;
+  width: 100vw;
+  height: 125vh;
 `
-
 const MobileSpacer = styled.br`
   display: block;
   width: 100%;

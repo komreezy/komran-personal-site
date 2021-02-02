@@ -5,8 +5,10 @@ import { H1, MediumText } from "../components/styles/TextStyles"
 import NavigationButton from "../components/sections/NavigationButton"
 import Layout from "../components/layout/layout"
 import SEO from "../components/layout/seo"
+import useWindowSize from "../controllers/windowSize"
 
 function Contact() {
+  const size = useWindowSize()
   function sendEmail() {
     var params = {
       personalizations: [
@@ -47,73 +49,156 @@ function Contact() {
     }
   }
 
+  function potentialMobileContact() {
+    if (size.width < 600) {
+      return (
+        <MobileContainer>
+          <Link to="/">
+            <MobileLogo src="/images/logos/Logo.svg" alt="logo" />
+          </Link>
+          <MobileTitleWrapper>
+            <Link to="/about/">
+              <NavigationButton title="About"></NavigationButton>
+            </Link>
+            <a
+              href="https://medium.com/@komreezy_"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <NavigationButton title="Blog"></NavigationButton>
+            </a>
+            <Link to="/contact/">
+              <NavigationButton title="Contact"></NavigationButton>
+            </Link>
+            <Link to="/projects/">
+              <NavigationButton title="Projects"></NavigationButton>
+            </Link>
+          </MobileTitleWrapper>
+          <MobileContentWrapper>
+            <TopBlock>
+              <Title>Hit me up.</Title>
+              <Description>
+                always looking to connect & build something interesting
+              </Description>
+              <Social>
+                <a
+                  href="https://twitter.com/komreezy_"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SocialIcon src="/images/icons/twitter.png" />
+                </a>
+                <a
+                  href="https://www.instagram.com/komreezy/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SocialIcon src="/images/icons/instagram.png" />
+                </a>
+                <a
+                  href="https://github.com/komreezy"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SocialIcon src="/images/icons/github.png" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/komran/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SocialIcon src="/images/icons/linkedin.png" />
+                </a>
+              </Social>
+            </TopBlock>
+            <BottomBlock>
+              <EmailInputTitle>Email</EmailInputTitle>
+              <EmailInput></EmailInput>
+              <InputTitle>Message</InputTitle>
+              <MessageInput></MessageInput>
+              <SubmitButton onClick={sendEmail()}>Submit</SubmitButton>
+            </BottomBlock>
+          </MobileContentWrapper>
+        </MobileContainer>
+      )
+    } else {
+      return (
+        <Wrapper>
+          <TitleWrapper>
+            <Link to="/">
+              <Logo src="/images/logos/Logo.svg" alt="logo" />
+            </Link>
+            <Link to="/about/">
+              <NavigationButton title="About"></NavigationButton>
+            </Link>
+            <a
+              href="https://medium.com/@komreezy_"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <NavigationButton title="Blog"></NavigationButton>
+            </a>
+            <Link to="/contact/">
+              <NavigationButton title="Contact"></NavigationButton>
+            </Link>
+            <Link to="/projects/">
+              <NavigationButton title="Projects"></NavigationButton>
+            </Link>
+          </TitleWrapper>
+          <ContentWrapper>
+            <LeftBlock>
+              <Title>Hit me up.</Title>
+              <Description>
+                always looking to connect & build something interesting
+              </Description>
+              <Social>
+                <a
+                  href="https://twitter.com/komreezy_"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SocialIcon src="/images/icons/twitter.png" />
+                </a>
+                <a
+                  href="https://www.instagram.com/komreezy/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SocialIcon src="/images/icons/instagram.png" />
+                </a>
+                <a
+                  href="https://github.com/komreezy"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SocialIcon src="/images/icons/github.png" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/komran/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SocialIcon src="/images/icons/linkedin.png" />
+                </a>
+              </Social>
+            </LeftBlock>
+            <RightBlock>
+              <EmailInputTitle>Email</EmailInputTitle>
+              <EmailInput></EmailInput>
+              <InputTitle>Message</InputTitle>
+              <MessageInput></MessageInput>
+              <SubmitButton onClick={sendEmail()}>Submit</SubmitButton>
+            </RightBlock>
+          </ContentWrapper>
+        </Wrapper>
+      )
+    }
+  }
+
   return (
     <Layout>
       <SEO title="Contact" />
-      <Wrapper>
-        <TitleWrapper>
-          <Link to="/">
-            <Logo src="/images/logos/Logo.svg" alt="logo" />
-          </Link>
-          <Link to="/about/">
-            <NavigationButton title="About"></NavigationButton>
-          </Link>
-          <a href="https://medium.com/@komreezy_" target="_blank">
-            <NavigationButton title="Blog"></NavigationButton>
-          </a>
-          <Link to="/contact/">
-            <NavigationButton title="Contact"></NavigationButton>
-          </Link>
-          <Link to="/projects/">
-            <NavigationButton title="Projects"></NavigationButton>
-          </Link>
-        </TitleWrapper>
-        <ContentWrapper>
-          <LeftBlock>
-            <Title>Hit me up.</Title>
-            <Description>
-              always looking to connect & build something interesting
-            </Description>
-            <Social>
-              <a
-                href="https://twitter.com/komreezy_"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <SocialIcon src="/images/icons/twitter.png" />
-              </a>
-              <a
-                href="https://www.instagram.com/komreezy/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <SocialIcon src="/images/icons/instagram.png" />
-              </a>
-              <a
-                href="https://github.com/komreezy"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <SocialIcon src="/images/icons/github.png" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/komran/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <SocialIcon src="/images/icons/linkedin.png" />
-              </a>
-            </Social>
-          </LeftBlock>
-          <RightBlock>
-            <EmailInputTitle>Email</EmailInputTitle>
-            <EmailInput></EmailInput>
-            <InputTitle>Message</InputTitle>
-            <MessageInput></MessageInput>
-            <SubmitButton onClick={sendEmail()}>Submit</SubmitButton>
-          </RightBlock>
-        </ContentWrapper>
-      </Wrapper>
+      {potentialMobileContact()}
     </Layout>
   )
 }
@@ -250,4 +335,54 @@ const SubmitButton = styled.button`
   margin-top: 12pt;
   margin-right: -2pt;
   cursor: pointer;
+`
+
+// Mobile
+const TopBlock = styled.div`
+  float: top;
+  width: 218pt;
+  margin-top: 24pt;
+`
+
+const BottomBlock = styled.div`
+  float: bottom;
+  width: 218pt;
+  margin-bottom: 24pt;
+`
+
+const MobileContentWrapper = styled.div`
+  grid-area: "content";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50%;
+`
+
+const MobileTitleWrapper = styled.div`
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  top: 20%;
+`
+
+const MobileLogo = styled.img`
+  margin-top: 5%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+  height: auto;
+`
+
+const MobileContainer = styled.div`
+  margin: auto;
+  position: fixed;
+  background: #f1f2eb;
+  padding-top: 12px;
+  padding-right: 12px;
+  width: 100vw;
+  height: 100vh;
 `
