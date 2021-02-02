@@ -103,6 +103,7 @@ const MenuButton = styled(Link)`
   padding-left: 3pt;
   padding-right: 3pt;
   cursor: pointer;
+  text-decoration: none;
   height: 28pt;
   min-width: 80pt;
   border-radius: 14pt;
