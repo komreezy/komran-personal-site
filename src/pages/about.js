@@ -9,14 +9,17 @@ import NavigationButton from "../components/sections/NavigationButton"
 import ListCell from "../components/sections/ListCell"
 import MusicCell from "../components/sections/MusicCell"
 import MenuButton from "../components/sections/MenuButton"
+import useWindowSize from "../controllers/windowSize"
 
 function About() {
   var newXHR = null
+  const size = useWindowSize()
   const [state, setState] = useState({
     tab: "Idle",
     rows: [],
     lists: [],
   })
+
   useEffect(() => {
     const onChange = newData => {
       setState({
@@ -193,13 +196,14 @@ function About() {
     })
   }
 
-  return (
-    <Layout>
-      <SEO title="About" />
-      <Wrapper>
-        <ContentWrapper>
-          <TitleWrapper>
-            <div />
+  function potentialMobileAbout() {
+    if (size.width < 600) {
+      return (
+        <MobileContainer>
+          <Link to="/">
+            <MobileLogo src="/images/logos/Logo.svg" alt="logo" />
+          </Link>
+          <MobileTitleWrapper>
             <Link to="/about/">
               <NavigationButton title="About"></NavigationButton>
             </Link>
@@ -212,44 +216,94 @@ function About() {
             <Link to="/projects/">
               <NavigationButton title="Projects"></NavigationButton>
             </Link>
-          </TitleWrapper>
-          <ProfileWrapper>
-            <Margin />
-            {content(state.tab)}
-            <Margin />
-          </ProfileWrapper>
-        </ContentWrapper>
-        <Link to="/">
-          <Logo src="/images/logos/Logo.svg" alt="logo" />
-        </Link>
-        <ListsWrapper>
-          <ListButtonContainer>
-            <Margin />
-            <MenuButton
-              type="Lists"
-              isSelected={state.tab === "Lists"}
-              onClick={() => fetchLists()}
+          </MobileTitleWrapper>
+          <MobileProfileDescriptionStack>
+            <MobileProfileImage
+              src="/images/avatars/komran.jpg"
+              alt="profile"
             />
-            <MenuButton
-              type="Music"
-              isSelected={state.tab === "Music"}
-              onClick={() => fetchSpotifyToken()}
-            />
-            <MenuButton
-              type="Photos"
-              isSelected={state.tab === "Photos"}
-              onClick={() =>
-                setState({
-                  rows: state.rows,
-                  tab: "Photos",
-                  lists: state.lists,
-                })
-              }
-            />
-            <Margin />
-          </ListButtonContainer>
-        </ListsWrapper>
-      </Wrapper>
+            <br />
+            <br />
+            <MobileDescription>
+              My name is Komran, I'm an iOS Developer based out of NYC.
+              Currently invested in pickup soccer, video games, and taking care
+              of my babies (my dog + my plants).
+            </MobileDescription>
+            <br />
+            <MobileDescription>
+              As a first generation Iranian-American, I got to see what
+              sacrifices immigrants in America have to make for their families
+              first hand. These sacrifices are what drives me today. Although
+              Statesville will always be close to my heart, I moved to Atlanta
+              in 2007, the city that really deserves credit for raising me.
+            </MobileDescription>
+          </MobileProfileDescriptionStack>
+        </MobileContainer>
+      )
+    } else {
+      return (
+        <Wrapper>
+          <ContentWrapper>
+            <TitleWrapper>
+              <div />
+              <Link to="/about/">
+                <NavigationButton title="About"></NavigationButton>
+              </Link>
+              <a href="https://medium.com/@komreezy_" target="_blank">
+                <NavigationButton title="Blog"></NavigationButton>
+              </a>
+              <Link to="/contact/">
+                <NavigationButton title="Contact"></NavigationButton>
+              </Link>
+              <Link to="/projects/">
+                <NavigationButton title="Projects"></NavigationButton>
+              </Link>
+            </TitleWrapper>
+            <ProfileWrapper>
+              <Margin />
+              {content(state.tab)}
+              <Margin />
+            </ProfileWrapper>
+          </ContentWrapper>
+          <Link to="/">
+            <Logo src="/images/logos/Logo.svg" alt="logo" />
+          </Link>
+          <ListsWrapper>
+            <ListButtonContainer>
+              <Margin />
+              <MenuButton
+                type="Lists"
+                isSelected={state.tab === "Lists"}
+                onClick={() => fetchLists()}
+              />
+              <MenuButton
+                type="Music"
+                isSelected={state.tab === "Music"}
+                onClick={() => fetchSpotifyToken()}
+              />
+              <MenuButton
+                type="Photos"
+                isSelected={state.tab === "Photos"}
+                onClick={() =>
+                  setState({
+                    rows: state.rows,
+                    tab: "Photos",
+                    lists: state.lists,
+                  })
+                }
+              />
+              <Margin />
+            </ListButtonContainer>
+          </ListsWrapper>
+        </Wrapper>
+      )
+    }
+  }
+
+  return (
+    <Layout>
+      <SEO title="About" />
+      {potentialMobileAbout()}
     </Layout>
   )
 }
@@ -319,7 +373,6 @@ const ProfileWrapper = styled.div`
 
 const ProfileDescriptionStack = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
 `
 
@@ -392,4 +445,59 @@ const MusicUL = styled.ul`
   columns: 3;
   -webkit-columns: 3;
   -moz-columns: 3;
+`
+
+/// MOBILE : ---------------------------------------------------------------------------------------------------------
+const MobileContainer = styled.div`
+  margin: auto;
+`
+
+const MobileDescription = styled.p`
+  text-align: center;
+  font-size: 12pt;
+  margin: auto;
+  font-family: "Jura", sans-serif;
+  color: #151515;
+`
+
+const MobileProfileDescriptionStack = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: -5%;
+`
+
+const MobileProfileImage = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+`
+
+const MobileTitleWrapper = styled.div`
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  top: 20%;
+`
+
+const MobileLogo = styled.img`
+  margin-top: 5%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+  height: auto;
+`
+
+const MobileSpacer = styled.br`
+  display: block;
+  width: 100%;
+  height: 2%;
 `

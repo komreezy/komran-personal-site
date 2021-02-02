@@ -5,8 +5,10 @@ import NavigationButton from "../components/sections/NavigationButton"
 import Layout from "../components/layout/layout"
 import SEO from "../components/layout/seo"
 import ProjectCell from "../components/sections/ProjectCell"
+import useWindowSize from "../controllers/windowSize"
 
 function Projects() {
+  const size = useWindowSize()
   const [state, setState] = useState([
     {
       name: "Peloton",
@@ -84,32 +86,67 @@ function Projects() {
     })
   }
 
+  function potentialMobileProjects() {
+    if (size.width < 600) {
+      return (
+        <MobileContainer>
+          <Link to="/">
+            <MobileLogo src="/images/logos/Logo.svg" alt="logo" />
+          </Link>
+          <MobileTitleWrapper>
+            <Link to="/about/">
+              <NavigationButton title="About"></NavigationButton>
+            </Link>
+            <a href="https://medium.com/@komreezy_" target="_blank">
+              <NavigationButton title="Blog"></NavigationButton>
+            </a>
+            <Link to="/contact/">
+              <NavigationButton title="Contact"></NavigationButton>
+            </Link>
+            <Link to="/projects/">
+              <NavigationButton title="Projects"></NavigationButton>
+            </Link>
+          </MobileTitleWrapper>
+          <ContentWrapper>
+            <MobileSpacer />
+            <Title>Projects</Title>
+            <ProjectUL>{createProjectsTable()}</ProjectUL>
+          </ContentWrapper>
+        </MobileContainer>
+      )
+    } else {
+      return (
+        <Wrapper>
+          <TitleWrapper>
+            <Link to="/">
+              <Logo src="/images/logos/Logo.svg" alt="logo" />
+            </Link>
+            <Link to="/about/">
+              <NavigationButton title="About"></NavigationButton>
+            </Link>
+            <a href="https://medium.com/@komreezy_" target="_blank">
+              <NavigationButton title="Blog"></NavigationButton>
+            </a>
+            <Link to="/contact/">
+              <NavigationButton title="Contact"></NavigationButton>
+            </Link>
+            <Link to="/projects/">
+              <NavigationButton title="Projects"></NavigationButton>
+            </Link>
+          </TitleWrapper>
+          <ContentWrapper>
+            <Title>Projects</Title>
+            <ProjectUL>{createProjectsTable()}</ProjectUL>
+          </ContentWrapper>
+        </Wrapper>
+      )
+    }
+  }
+
   return (
     <Layout>
       <SEO title="Projects" />
-      <Wrapper>
-        <TitleWrapper>
-          <Link to="/">
-            <Logo src="/images/logos/Logo.svg" alt="logo" />
-          </Link>
-          <Link to="/about/">
-            <NavigationButton title="About"></NavigationButton>
-          </Link>
-          <a href="https://medium.com/@komreezy_" target="_blank">
-            <NavigationButton title="Blog"></NavigationButton>
-          </a>
-          <Link to="/contact/">
-            <NavigationButton title="Contact"></NavigationButton>
-          </Link>
-          <Link to="/projects/">
-            <NavigationButton title="Projects"></NavigationButton>
-          </Link>
-        </TitleWrapper>
-        <ContentWrapper>
-          <Title>Projects</Title>
-          <ProjectUL>{createProjectsTable()}</ProjectUL>
-        </ContentWrapper>
-      </Wrapper>
+      {potentialMobileProjects()}
     </Layout>
   )
 }
@@ -166,4 +203,33 @@ const ProjectUL = styled.ul`
   padding-bottom: 32px;
   margin-left: 20%;
   margin-right: 20%;
+`
+
+/// MOBILE : ---------------------------------------------------------------------------------------------------------
+const MobileTitleWrapper = styled.div`
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  top: 20%;
+`
+
+const MobileLogo = styled.img`
+  margin-top: 5%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+  height: auto;
+`
+
+const MobileContainer = styled.div`
+  margin: auto;
+`
+
+const MobileSpacer = styled.br`
+  display: block;
+  width: 100%;
+  height: 2%;
 `
