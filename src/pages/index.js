@@ -117,6 +117,7 @@ const Blog = styled.a`
   justify-content: center;
   padding-left: 3pt;
   padding-right: 3pt;
+  text-decoration: none;
   cursor: pointer;
   height: 28pt;
   min-width: 80pt;
