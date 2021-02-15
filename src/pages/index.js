@@ -58,7 +58,7 @@ function IndexPage() {
 
   return (
     <Layout>
-      <SEO title="Komran Ghahremani" />
+      <SEO title="Home" />
       {potentialSnakeGame()}
       {potentialHeroSection()}
     </Layout>
