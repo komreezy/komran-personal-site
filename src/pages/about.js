@@ -93,15 +93,16 @@ function About() {
           <br></br>
           <br></br>
           <Description>
-            Hey, I’m Komran. I'm an iOS Developer based out of NYC. Currently,
+            Hey! I’m Komran. I'm an iOS Developer based out of NYC. Currently,
             at Peloton delivering cardio to your living room. Always invested in
             soccer, video games, and taking care of my babies (my dog + my
             plants).
           </Description>
           <Description>
             I’m a proud first generation Iranian-American raised by my parents
-            and Atlanta. And at the end of the day, I just want to cut up and
-            make cool stuff with my friends.
+            and Atlanta. Other than software, I enjoy snowboarding, poker, and
+            writing terrible blurbs. Jokes aside, I just want to cut up and make
+            stuff with my friends.
           </Description>
         </ProfileDescriptionStack>
       )
@@ -228,7 +229,7 @@ function About() {
             <br />
             <br />
             <MobileDescription>
-              Hey, I’m Komran. I'm an iOS Developer based out of NYC. Currently,
+              Hey! I’m Komran. I'm an iOS Developer based out of NYC. Currently,
               at Peloton delivering cardio to your living room. Always invested
               in soccer, video games, and taking care of my babies (my dog + my
               plants).
@@ -236,8 +237,9 @@ function About() {
             <br />
             <MobileDescription>
               I’m a proud first generation Iranian-American raised by my parents
-              and Atlanta. And at the end of the day, I just want to cut up and
-              make cool stuff with my friends.
+              and Atlanta. Other than software, I enjoy snowboarding, poker, and
+              writing terrible blurbs. Jokes aside, I just want to cut up and
+              make stuff with my friends.
             </MobileDescription>
           </MobileProfileDescriptionStack>
         </MobileContainer>
