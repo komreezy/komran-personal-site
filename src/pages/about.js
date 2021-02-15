@@ -229,17 +229,16 @@ function About() {
             <br />
             <br />
             <MobileDescription>
-              My name is Komran, I'm an iOS Developer based out of NYC.
-              Currently invested in pickup soccer, video games, and taking care
-              of my babies (my dog + my plants).
+              Hey, I’m Komran. I'm an iOS Developer based out of NYC. Currently,
+              at Peloton delivering cardio to your living room. Always invested
+              in soccer, video games, and taking care of my babies (my dog + my
+              plants).
             </MobileDescription>
             <br />
             <MobileDescription>
-              As a first generation Iranian-American, I got to see what
-              sacrifices immigrants in America have to make for their families
-              first hand. These sacrifices are what drives me today. Although
-              Statesville will always be close to my heart, I moved to Atlanta
-              in 2007, the city that really deserves credit for raising me.
+              I’m a proud first generation Iranian-American raised by my parents
+              and Atlanta. And at the end of the day, I just want to cut up and
+              make cool stuff with my friends.
             </MobileDescription>
           </MobileProfileDescriptionStack>
         </MobileContainer>
