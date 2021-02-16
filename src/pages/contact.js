@@ -184,9 +184,9 @@ function Contact() {
             </LeftBlock>
             <RightBlock name="contact" method="POST" data-netlify="true">
               <EmailInputTitle>Email</EmailInputTitle>
-              <EmailInput type="text" name="email"></EmailInput>
+              <EmailInput type="email" name="email"></EmailInput>
               <InputTitle>Message</InputTitle>
-              <MessageInput type="text" name="message"></MessageInput>
+              <MessageInput name="message"></MessageInput>
               <SubmitButton type="submit" onClick={sendEmail()}>
                 Submit
               </SubmitButton>
