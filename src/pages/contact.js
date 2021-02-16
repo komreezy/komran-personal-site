@@ -183,10 +183,20 @@ function Contact() {
               </Social>
             </LeftBlock>
             <RightBlock name="contact" method="POST" data-netlify="true">
-              <EmailInputTitle>Email</EmailInputTitle>
-              <EmailInput type="email" name="email"></EmailInput>
-              <InputTitle>Message</InputTitle>
-              <MessageInput name="message"></MessageInput>
+              <p>
+                <EmailInputTitle>
+                  Email <EmailInput type="email" name="email" />
+                </EmailInputTitle>
+              </p>
+              {/* <EmailInputTitle>Email</EmailInputTitle> */}
+              {/* <EmailInput type="email" name="email"></EmailInput> */}
+              <p>
+                <InputTitle>
+                  Message <MessageInput name="message"></MessageInput>
+                </InputTitle>
+              </p>
+              {/* <InputTitle>Message</InputTitle>
+              <MessageInput name="message"></MessageInput> */}
               <SubmitButton type="submit" onClick={sendEmail()}>
                 Submit
               </SubmitButton>
@@ -288,7 +298,6 @@ const InputTitle = styled(MediumText)`
   font-weight: 500;
   font-size: 10pt;
   margin-left: 2pt;
-  margin-bottom: 4pt;
   color: #151515;
   max-width: 218pt;
   text-align: left;
@@ -308,7 +317,9 @@ const EmailInput = styled.input`
   text-align: left;
   border: none;
   margin-bottom: 12pt;
+  margin-left: -2pt;
   outline: none;
+  margin-top: 4pt;
 `
 const MessageInput = styled.textarea`
   background-color: #f9f9f5;
@@ -321,6 +332,8 @@ const MessageInput = styled.textarea`
   border: none;
   outline: none;
   resize: none;
+  margin-top: 4pt;
+  margin-left: -2pt;
 `
 
 const SubmitButton = styled.button`
