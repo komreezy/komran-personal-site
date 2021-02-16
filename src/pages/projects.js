@@ -207,6 +207,7 @@ const ProjectUL = styled.ul`
   padding-bottom: 32px;
   margin-left: 20%;
   margin-right: 20%;
+  max-width: 600pt;
 `
 
 /// MOBILE : ---------------------------------------------------------------------------------------------------------

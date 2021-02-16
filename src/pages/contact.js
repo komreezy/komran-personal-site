@@ -182,12 +182,14 @@ function Contact() {
                 </a>
               </Social>
             </LeftBlock>
-            <RightBlock>
+            <RightBlock name="contact" method="POST" data-netlify="true">
               <EmailInputTitle>Email</EmailInputTitle>
-              <EmailInput></EmailInput>
+              <EmailInput type="text" name="email"></EmailInput>
               <InputTitle>Message</InputTitle>
-              <MessageInput></MessageInput>
-              <SubmitButton onClick={sendEmail()}>Submit</SubmitButton>
+              <MessageInput type="text" name="message"></MessageInput>
+              <SubmitButton type="submit" onClick={sendEmail()}>
+                Submit
+              </SubmitButton>
             </RightBlock>
           </ContentWrapper>
         </Wrapper>
@@ -234,7 +236,7 @@ const LeftBlock = styled.div`
   margin-right: 24pt;
 `
 
-const RightBlock = styled.div`
+const RightBlock = styled.form`
   float: right;
   width: 218pt;
   margin-left: 24pt;
