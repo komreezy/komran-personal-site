@@ -184,20 +184,20 @@ function Contact() {
             </LeftBlock>
             <RightBlock name="contact" method="POST" data-netlify="true">
               <input type="hidden" name="form-name" value="contact" />
-              <p>
+              {/* <p>
                 <EmailInputTitle>
                   Email <EmailInput type="email" name="email" />
                 </EmailInputTitle>
-              </p>
-              {/* <EmailInputTitle>Email</EmailInputTitle> */}
-              {/* <EmailInput type="email" name="email"></EmailInput> */}
-              <p>
+              </p> */}
+              <EmailInputTitle>Email</EmailInputTitle>
+              <EmailInput type="email" name="email"></EmailInput>
+              {/* <p>
                 <InputTitle>
                   Message <MessageInput name="message"></MessageInput>
                 </InputTitle>
-              </p>
-              {/* <InputTitle>Message</InputTitle>
-              <MessageInput name="message"></MessageInput> */}
+              </p> */}
+              <InputTitle>Message</InputTitle>
+              <MessageInput name="message"></MessageInput>
               <SubmitButton type="submit" onClick={sendEmail()}>
                 Submit
               </SubmitButton>
