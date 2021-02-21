@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "gatsby";
-import styled from "styled-components";
-import { H1, MediumText } from "../styles/TextStyles";
-import NavigationButton from "./NavigationButton";
+import React from "react"
+import { Link } from "gatsby"
+import styled from "styled-components"
+import { H1, MediumText } from "../styles/TextStyles"
+import NavigationButton from "./NavigationButton"
 
 function HeroSection(props) {
   return (
@@ -29,10 +29,10 @@ function HeroSection(props) {
         <Description>{props.description}</Description>
       </ContentWrapper>
     </Wrapper>
-  );
+  )
 }
 
-export default HeroSection;
+export default HeroSection
 
 const Wrapper = styled.div`
   display: grid;
@@ -46,7 +46,8 @@ const Wrapper = styled.div`
   background: #f1f2eb;
   padding-top: 12px;
   padding-right: 12px;
-`;
+  overflow: hidden;
+`
 
 const ContentWrapper = styled.div`
   //max-width: 1234px; // responsive but cuts off when screen too big
@@ -58,29 +59,29 @@ const ContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 300px;
-`;
+`
 
 const TitleWrapper = styled.div`
   padding-right: 12px; // top/bottom & left/right
   grid-area: "title";
-`;
+`
 
 const Title = styled(H1)`
   font-family: "Lalezar", cursive;
   color: #23a384;
   text-align: center;
   padding-bottom: 4px;
-`;
+`
 
 const Description = styled(MediumText)`
   font-family: "Lalezar", cursive;
   color: #23a384;
   text-align: center;
-`;
+`
 
 const Logo = styled.img`
   width: 3%;
   height: auto;
   padding-top: 8px;
   padding-left: 24px;
-`;
+`
