@@ -57,11 +57,11 @@ function IndexPage() {
   }
 
   return (
-    <Layout>
+    <IndexWrapper>
       <SEO title="Home" />
       {potentialSnakeGame()}
       {potentialHeroSection()}
-    </Layout>
+    </IndexWrapper>
   )
 }
 
@@ -133,4 +133,9 @@ const Logo = styled.img`
   height: auto;
   z-index: 100;
   transform: translate(-50%, 0%);
+`
+
+const IndexWrapper = styled(Layout)`
+  height: 100vh;
+  overflow: hidden;
 `
