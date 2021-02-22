@@ -138,4 +138,5 @@ const Logo = styled.img`
 const IndexWrapper = styled(Layout)`
   height: 100vh;
   overflow: hidden;
+  position: fixed;
 `
