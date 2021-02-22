@@ -139,5 +139,5 @@ const IndexWrapper = styled(Layout)`
   height: 100vh;
   overflow: auto;
   position: fixed;
-  -webkit-overflow-scrolling: auto;
+  -webkit-overflow-scrolling: touch;
 `
