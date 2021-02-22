@@ -137,7 +137,7 @@ const Logo = styled.img`
 
 const IndexWrapper = styled(Layout)`
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   position: fixed;
   -webkit-overflow-scrolling: auto;
 `
